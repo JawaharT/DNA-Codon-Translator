@@ -4,6 +4,7 @@ from Bio.Seq import Seq
 from Bio.Alphabet import IUPAC
 from Bio.SeqUtils import seq3
 
+
 def nucleotide_entered(nucleotide):
     if sequence_text.get() != "Enter Sequence":
         sequence_text.set(sequence_text.get() + nucleotide)
@@ -17,7 +18,13 @@ def get_protein():
         dna = Seq(str_sequence_text, IUPAC.unambiguous_dna)
         mrna = dna.transcribe()
         protein = mrna.translate()
-        messagebox.showinfo("!", "Final Converted Protein is: " + str(seq3(protein)))
+        three_letter_aa = str(seq3(protein))
+        new_dashed_3_letter_aa = ""
+        for index,letter in enumerate(three_letter_aa):
+            if (index % 3 == 0) and (index != 0):
+                new_dashed_3_letter_aa += "-"
+            new_dashed_3_letter_aa += letter
+        messagebox.showinfo("!", "Final Converted Protein is: " + new_dashed_3_letter_aa)
     else:
         messagebox.showerror("!", "Sequence needs to be a multiple of 3 or sequence should not be 0.")
 
