@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from Bio.Seq import Seq
 from Bio.Alphabet import IUPAC
+from Bio.SeqUtils import seq3
 
 def nucleotide_entered(nucleotide):
     if sequence_text.get() != "Enter Sequence":
@@ -16,7 +17,7 @@ def get_protein():
         dna = Seq(str_sequence_text, IUPAC.unambiguous_dna)
         mrna = dna.transcribe()
         protein = mrna.translate()
-        messagebox.showinfo("!", "Final Converted Protein is: " + str(protein))
+        messagebox.showinfo("!", "Final Converted Protein is: " + str(seq3(protein)))
     else:
         messagebox.showerror("!", "Sequence needs to be a multiple of 3 or sequence should not be 0.")
 
