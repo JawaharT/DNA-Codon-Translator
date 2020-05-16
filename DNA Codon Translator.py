@@ -4,14 +4,14 @@ from Bio.Seq import Seq
 from Bio.Alphabet import IUPAC
 from Bio.SeqUtils import seq3
 
-
+#Updates user entered sequence in the GUI
 def nucleotide_entered(nucleotide):
     if sequence_text.get() != "Enter Sequence":
         sequence_text.set(sequence_text.get() + nucleotide)
     else:
         sequence_text.set(nucleotide)
 
-
+#Converts the DNA sequence entered by the user
 def get_protein():
     str_sequence_text = str(sequence_text.get())
     if (((len(str_sequence_text)) % 3) == 0) and (len(str_sequence_text) != 0):
@@ -28,11 +28,11 @@ def get_protein():
     else:
         messagebox.showerror("!", "Sequence needs to be a multiple of 3 or sequence should not be 0.")
 
-
+#Deletes the latest nucletide entered in the sequence
 def backspace():
     return sequence_text.set(str(sequence_text.get())[:-1])
 
-
+#The main GUI control centre
 def main():
     global sequence_text
     
@@ -51,6 +51,8 @@ def main():
     T_button = tk.Button(frame, text = "Thymine", fg = "brown", command = lambda: nucleotide_entered("T")).pack(side = "left", pady = 10, padx = 10)
     
     sequence_confirmed_button = tk.Button(frame, text = "Confirm Sequence", fg = "black", command = get_protein).pack(side = "right", pady = 10, padx = 10)
+
+    #Resets the sequence to empty string
     reset_button = tk.Button(frame, text = "Reset", fg = "orange", command = lambda: sequence_text.set("")).pack(side = "right", pady = 10, padx = 10)
     backspace_button = tk.Button(frame, text = "<--", fg = "orange", command = backspace).pack(side = "right", pady = 10, padx = 10)
 
